@@ -1,0 +1,156 @@
+html code :
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="link.css">
+</head>
+<body>
+  <div class="dashboard">
+    <header class="header">
+      <div>Admin Dashboard</div>
+      <label><input type="checkbox" id="theme-toggle" /> Dark Mode</label>
+    </header>
+
+    <nav class="sidebar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Users</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </nav>
+
+    <main class="main">
+      <h2>Welcome, Admin!</h2>
+      <p>This is the main content area. </p>
+    </main>
+
+    <footer class="footer">
+      &copy; 2025 Admin Panel
+    </footer>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    toggle.addEventListener('change', () => {
+      const theme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+    });
+  </script>
+</body>
+</html>
+css code :
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --header-color: #4caf50;
+  --sidebar-color: #e0e0e0;
+  --main-bg-color: #ffffff;
+  --link-color: #0000ee;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --header-color: #222;
+  --sidebar-color: #2c2c2c;
+  --main-bg-color: #121212;
+  --link-color: #bb86fc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100%;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 200px 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: var(--header-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--sidebar-color);
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+}
+
+.sidebar a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.main {
+  grid-area: main;
+  background-color: var(--main-bg-color);
+  padding: 30px;
+}
+
+.main h2 {
+  margin-bottom: 10px;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: var(--header-color);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+#theme-toggle {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main"
+      "sidebar"
+      "footer";
+  }
+
+  .sidebar {
+    padding: 10px;
+  }
+}
+
